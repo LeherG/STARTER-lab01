@@ -96,6 +96,8 @@ double IntList::average() const {
         curr = curr->next;
     }
 
+    if (count == 0) return 0;
+
     return sum/count;
 }
 
@@ -139,7 +141,8 @@ int IntList::count() const {
 //Assignment operator should copy the list from the source
 //to this list, deleting/replacing any existing nodes
 IntList& IntList::operator=(const IntList& source){
-    
+    if (this == &source) return *this;
+
     //deleting current list
     Node *curr = head;
     Node *next;
@@ -151,9 +154,10 @@ IntList& IntList::operator=(const IntList& source){
     tail = nullptr;
     head = nullptr;
 
-    //making new list
     if (!source.head) return *this;
 
+    //making new list
+    
     head = new Node;
     head->info = source.head->info;
     head->next = nullptr;
